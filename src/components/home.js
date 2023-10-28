@@ -1,40 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-function Tweet({ username, tweet, timestamp }) {
-    return (
-        <div className="tweet">
-            <p className="username">{username}</p>
-            <p className="tweet-text">{tweet}</p>
-            <p className="timestamp">{timestamp}</p>
-        </div>
-    );
-}
+const HomePage = () => {
+    const [posts, setPosts] = useState([]);
 
-function App() {
-    const tweets = [
-        {
-            username: 'JohnDoe',
-            tweet: 'Hello, Twitter!',
-            timestamp: '2 hours ago',
-        },
-        {
-            username: 'JaneSmith',
-            tweet: 'Just had a great day at the beach!',
-            timestamp: '4 hours ago',
-        },
-        {
-            username: 'AliceJohnson',
-            tweet: 'Excited to learn JavaScript today!',
-            timestamp: '6 hours ago',
-        },
-        // Add more tweets as needed
-    ];
+    useEffect(() => {
+        // Fetch posts from your data source or API
+        // For simplicity, we'll assume you have an array of post objects
+        const samplePosts = [
+            { id: 1, text: 'This is a sample post 1', username: 'user1' },
+            { id: 2, text: 'This is a sample post 2', username: 'user2' },
+            // Add more sample posts here
+        ];
+        setPosts(samplePosts);
+    }, []);
 
     return (
-        <div className="App">
-            <h1>Twitter Home Page</h1>
+        <div>
+            <h1>Home Page</h1>
+            {posts.map((post) => (
+                <div key={post.id}>
+                    <p>{post.text}</p>
+                    <p>Posted by: {post.username}</p>
+                </div>
+            ))}
         </div>
     );
-}
+};
 
-export default App;
+export default HomePage;
